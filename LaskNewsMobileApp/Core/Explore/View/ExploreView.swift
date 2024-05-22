@@ -8,11 +8,40 @@
 import SwiftUI
 
 struct ExploreView: View {
+    
+    @State private var activeCategory: FilteredCategory = .travel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            header()
+            
+            ScrollView {
+                FilteredArticleCategory(activeCategory: $activeCategory)
+                
+                
+                
+                
+            }
+        }
     }
 }
 
 #Preview {
     ExploreView()
+}
+
+
+@ViewBuilder
+private func header() -> some View {
+    HStack {
+        Text("Explore")
+            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            .bold()
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+        
+        Image(systemName: "magnifyingglass")
+    }
+    .padding()
+    .padding(.horizontal, 10)
+    .background(.activeFilteredCategory)
 }

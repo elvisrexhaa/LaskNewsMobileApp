@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ArticleDetailedView: View {
+    
+    
+    @Binding var selectedArticle: Article?
+    let article: Article
+    
     var body: some View {
         VStack {
             GeometryReader {
                 let size = $0.size
                 
                 
-                Image(.articleCard)
+                Image(article.articleImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: size.width, height: size.height * 0.2)
@@ -60,6 +65,11 @@ struct ArticleDetailedView: View {
                 HStack {
                     Image(systemName: "arrow.left")
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                        .onTapGesture {
+                            withAnimation(.smooth) {
+                                selectedArticle = nil
+                            }
+                        }
 
                     
                     Image(systemName: "bookmark")
@@ -81,5 +91,5 @@ struct ArticleDetailedView: View {
 }
 
 #Preview {
-    ArticleDetailedView()
+    ArticleDetailedView(selectedArticle: .constant(Article.mockArticles()[0]), article: Article.mockArticles()[0])
 }

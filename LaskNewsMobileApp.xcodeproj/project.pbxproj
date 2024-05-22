@@ -19,6 +19,8 @@
 		8821CF0A2BFE337B00D228D2 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CF092BFE337B00D228D2 /* CustomTabBar.swift */; };
 		8821CF0C2BFE398500D228D2 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CF0B2BFE398500D228D2 /* TabBarView.swift */; };
 		8821CF0E2BFE4B0300D228D2 /* ArticleDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CF0D2BFE4B0300D228D2 /* ArticleDetailedView.swift */; };
+		8821CF102BFE522600D228D2 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CF0F2BFE522600D228D2 /* ExploreView.swift */; };
+		8821CF132BFE52EE00D228D2 /* FilteredArticleCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CF122BFE52EE00D228D2 /* FilteredArticleCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		8821CF092BFE337B00D228D2 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		8821CF0B2BFE398500D228D2 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		8821CF0D2BFE4B0300D228D2 /* ArticleDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailedView.swift; sourceTree = "<group>"; };
+		8821CF0F2BFE522600D228D2 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		8821CF122BFE52EE00D228D2 /* FilteredArticleCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredArticleCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		8821CEEC2BFE1F4900D228D2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8821CF112BFE52D900D228D2 /* Components */,
 				8821CF082BFE336F00D228D2 /* MainTabBar */,
 				8821CF052BFE2DE700D228D2 /* Models */,
 				8821CEF72BFE291700D228D2 /* Home */,
@@ -203,6 +208,7 @@
 		8821CEFD2BFE295100D228D2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8821CF0F2BFE522600D228D2 /* ExploreView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,6 +263,14 @@
 				8821CF0B2BFE398500D228D2 /* TabBarView.swift */,
 			);
 			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		8821CF112BFE52D900D228D2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8821CF122BFE52EE00D228D2 /* FilteredArticleCategory.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8821CF102BFE522600D228D2 /* ExploreView.swift in Sources */,
 				8821CF072BFE2DF300D228D2 /* Article.swift in Sources */,
 				8821CF0C2BFE398500D228D2 /* TabBarView.swift in Sources */,
 				8821CEF62BFE286700D228D2 /* View Extensions.swift in Sources */,
@@ -337,6 +352,7 @@
 				8821CEDD2BFE1C6C00D228D2 /* LaskNewsMobileAppApp.swift in Sources */,
 				8821CF0A2BFE337B00D228D2 /* CustomTabBar.swift in Sources */,
 				8821CF042BFE2C2F00D228D2 /* HomeView.swift in Sources */,
+				8821CF132BFE52EE00D228D2 /* FilteredArticleCategory.swift in Sources */,
 				8821CEF12BFE1F7100D228D2 /* SplashScreenView.swift in Sources */,
 				8821CEF32BFE220F00D228D2 /* WelcomeView.swift in Sources */,
 			);

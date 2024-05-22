@@ -31,6 +31,8 @@ extension Article {
         
         return [
             Article(articleImage: "articleCardImage", articleTitle: "Experience the Serenity of Japan's", articleCateogory: .technology),
+            Article(articleImage: "articleCardImage2", articleTitle: "Discovering the Magic of Paris: A Journey through", articleCateogory: .technology),
+            Article(articleImage: "articleCardImage", articleTitle: "Experience the Serenity of Japan's", articleCateogory: .technology),
             Article(articleImage: "articleCardImage2", articleTitle: "Discovering the Magic of Paris: A Journey through", articleCateogory: .technology)
 
         ]

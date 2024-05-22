@@ -17,23 +17,23 @@ struct SplashScreenView: View {
         ZStack {
             if currentPage == 1 {
                 SplashScreenPage()
-                    .transition(.slide.combined(with: .blurReplace()))
+                    .transition(.slide)
     
             }
             
             if currentPage == 2 {
                 WelcomeView()
-                    .transition(.slide.combined(with: .blurReplace()))
+                    .transition(.slide)
                     
             }
             
             if currentPage == 3 {
                 TabBarView()
-                    .transition(.slide.combined(with: .blurReplace()))
+                    .transition(.slide)
                     
             }
         }
-        .animation(.smooth, value: currentPage)
+        .animation(.snappy, value: currentPage)
     }
 }
 

@@ -45,7 +45,7 @@ struct HomeView: View {
         .opacity(selectedArticle != nil ? 0 : 1)
         .overlay {
             if let article = selectedArticle {
-                ArticleDetailedView()
+                ArticleDetailedView(selectedArticle: $selectedArticle, article: article)
                     .transition(.slide)
             }
         }
@@ -79,6 +79,7 @@ private func header() -> some View {
         }
     }
     .padding(.horizontal)
+    .padding(.top, 15)
 }
 
 @ViewBuilder
@@ -99,7 +100,7 @@ private func articleCard(_ article: Article, onArticlePressed: (() -> ())?) -> s
             .foregroundStyle(Color(.systemGray2))
             .font(.subheadline)
     }
-    .padding(.horizontal)
+    .padding(.leading)
     .onTapGesture {
         withAnimation(.smooth) {
             onArticlePressed?()

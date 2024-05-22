@@ -19,7 +19,7 @@ struct TabBarView: View {
                     .tabItem { Image(systemName: "house") }
                     .tag(Tab.home)
                 
-                Text("Explore View")
+                ExploreView()
                     .tabItem { Image(systemName: "house") }
                     .tag(Tab.explore)
                 

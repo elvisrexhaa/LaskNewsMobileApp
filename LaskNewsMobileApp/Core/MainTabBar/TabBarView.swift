@@ -8,8 +8,37 @@
 import SwiftUI
 
 struct TabBarView: View {
+    
+    @State private var activeTab: Tab = .home
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .bottom) {
+            TabView(selection: $activeTab) {
+                
+                HomeView()
+                    .tabItem { Image(systemName: "house") }
+                    .tag(Tab.home)
+                
+                Text("Explore View")
+                    .tabItem { Image(systemName: "house") }
+                    .tag(Tab.explore)
+                
+                Text("Bookmark View")
+                    .tabItem { Image(systemName: "house") }
+                    .tag(Tab.bookmark)
+                
+                Text("Profile View")
+                    .tabItem { Image(systemName: "house") }
+                    .tag(Tab.profile)
+            }
+            
+            CustomTabBar(activeTab: $activeTab)
+                
+        }
+        .ignoresSafeArea(edges: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
+        .onAppear {
+            UITabBar.appearance().isHidden = true
+        }
     }
 }
 

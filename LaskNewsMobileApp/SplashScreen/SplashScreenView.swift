@@ -28,7 +28,7 @@ struct SplashScreenView: View {
             }
             
             if currentPage == 3 {
-                HomeView()
+                TabBarView()
                     .transition(.slide.combined(with: .blurReplace()))
                     
             }

@@ -10,12 +10,14 @@ import SwiftUI
 struct TabBarView: View {
     
     @State private var activeTab: Tab = .home
+    @State private var showTabBar: Bool = true
+    
     
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $activeTab) {
                 
-                HomeView()
+                HomeView(showTabBar: $showTabBar)
                     .tabItem { Image(systemName: "house") }
                     .tag(Tab.home)
                 
@@ -32,7 +34,9 @@ struct TabBarView: View {
                     .tag(Tab.profile)
             }
             
-            CustomTabBar(activeTab: $activeTab)
+            if showTabBar {
+                CustomTabBar(activeTab: $activeTab)
+            }
                 
         }
         .ignoresSafeArea(edges: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)

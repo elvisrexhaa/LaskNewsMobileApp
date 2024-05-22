@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArticleDetailedView: View {
     
-    
+    @Binding var showTabBar: Bool
     @Binding var selectedArticle: Article?
     let article: Article
     
@@ -68,6 +68,7 @@ struct ArticleDetailedView: View {
                         .onTapGesture {
                             withAnimation(.smooth) {
                                 selectedArticle = nil
+                                showTabBar = true
                             }
                         }
 
@@ -84,6 +85,7 @@ struct ArticleDetailedView: View {
                 
         }
         .ignoresSafeArea(edges: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
+       
         
         
         
@@ -91,5 +93,5 @@ struct ArticleDetailedView: View {
 }
 
 #Preview {
-    ArticleDetailedView(selectedArticle: .constant(Article.mockArticles()[0]), article: Article.mockArticles()[0])
+    ArticleDetailedView(showTabBar: .constant(false) ,selectedArticle: .constant(Article.mockArticles()[0]), article: Article.mockArticles()[0])
 }

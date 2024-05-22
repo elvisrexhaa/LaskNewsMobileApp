@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var selectedArticle: Article?
+    @Binding var showTabBar: Bool
     
     var body: some View {
         ScrollView {
@@ -21,6 +22,7 @@ struct HomeView: View {
                         ForEach(Article.mockArticles()) { article in
                             articleCard(article) {
                                 selectedArticle = article
+                                showTabBar = false
                             }
                         }
                     }
@@ -35,6 +37,7 @@ struct HomeView: View {
                         ForEach(Article.mockArticles()) { article in
                             articleCard(article) {
                                 selectedArticle = article
+                                showTabBar = false
                             }
                         }
                     }
@@ -45,7 +48,7 @@ struct HomeView: View {
         .opacity(selectedArticle != nil ? 0 : 1)
         .overlay {
             if let article = selectedArticle {
-                ArticleDetailedView(selectedArticle: $selectedArticle, article: article)
+                ArticleDetailedView(showTabBar: $showTabBar, selectedArticle: $selectedArticle, article: article)
                     .transition(.slide)
             }
         }
@@ -53,7 +56,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(showTabBar: .constant(false))
 }
 
 

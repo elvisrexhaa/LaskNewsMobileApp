@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State private var selectedArticle: Article?
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
@@ -16,7 +19,9 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(spacing: 0) {
                         ForEach(Article.mockArticles()) { article in
-                            articleCard(article)
+                            articleCard(article) {
+                                selectedArticle = article
+                            }
                         }
                     }
                 }
@@ -28,11 +33,20 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(spacing: 0) {
                         ForEach(Article.mockArticles()) { article in
-                            articleCard(article)
+                            articleCard(article) {
+                                selectedArticle = article
+                            }
                         }
                     }
                 }
                 .scrollIndicators(.hidden)
+            }
+        }
+        .opacity(selectedArticle != nil ? 0 : 1)
+        .overlay {
+            if let article = selectedArticle {
+                ArticleDetailedView()
+                    .transition(.slide)
             }
         }
     }
@@ -68,7 +82,7 @@ private func header() -> some View {
 }
 
 @ViewBuilder
-private func articleCard(_ article: Article) -> some View {
+private func articleCard(_ article: Article, onArticlePressed: (() -> ())?) -> some View {
     VStack(alignment: .leading) {
         Image(article.articleImage)
             .resizable()
@@ -86,6 +100,11 @@ private func articleCard(_ article: Article) -> some View {
             .font(.subheadline)
     }
     .padding(.horizontal)
+    .onTapGesture {
+        withAnimation(.smooth) {
+            onArticlePressed?()
+        }
+    }
     
 }
 

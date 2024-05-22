@@ -38,8 +38,6 @@ enum Tab: CaseIterable {
             return "Profile"
         }
     }
-    
-    
 }
 
 
@@ -66,7 +64,10 @@ struct CustomTabBar: View {
                             Text(tab.tabTitle)
                                 .font(.caption)
                                 .frame(width: 60)
+                            
                         }
+                        
+                        
                         
                     }
                     .foregroundStyle(activeTab == tab ? .white : .gray).bold()
@@ -86,7 +87,17 @@ struct CustomTabBar: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 20)
-        .background(.customTabBg.opacity(0.95), in: .rect(topLeadingRadius: 20, topTrailingRadius: 20))
+        .background(
+            
+            ZStack {
+                Color.customTabBg.opacity(0.8)
+                    .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
+                    .blur(radius: 4)
+            }
+            
+            
+        )
+             
     }
 }
 

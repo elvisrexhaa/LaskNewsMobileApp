@@ -13,6 +13,9 @@
 		8821CEE42BFE1C6D00D228D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8821CEE32BFE1C6D00D228D2 /* Preview Assets.xcassets */; };
 		8821CEF12BFE1F7100D228D2 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CEF02BFE1F7100D228D2 /* SplashScreenView.swift */; };
 		8821CEF32BFE220F00D228D2 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CEF22BFE220F00D228D2 /* WelcomeView.swift */; };
+		8821CEF62BFE286700D228D2 /* View Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CEF52BFE286700D228D2 /* View Extensions.swift */; };
+		8821CF042BFE2C2F00D228D2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CF032BFE2C2F00D228D2 /* HomeView.swift */; };
+		8821CF072BFE2DF300D228D2 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821CF062BFE2DF300D228D2 /* Article.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +26,9 @@
 		8821CEE32BFE1C6D00D228D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8821CEF02BFE1F7100D228D2 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		8821CEF22BFE220F00D228D2 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		8821CEF52BFE286700D228D2 /* View Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Extensions.swift"; sourceTree = "<group>"; };
+		8821CF032BFE2C2F00D228D2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8821CF062BFE2DF300D228D2 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,14 +61,15 @@
 		8821CEDB2BFE1C6C00D228D2 /* LaskNewsMobileApp */ = {
 			isa = PBXGroup;
 			children = (
+				8821CEEA2BFE1F3A00D228D2 /* App */,
+				8821CEE02BFE1C6D00D228D2 /* Assets.xcassets */,
+				8821CEEC2BFE1F4900D228D2 /* Core */,
+				8821CEF42BFE285A00D228D2 /* Extensions */,
+				8821CEE22BFE1C6D00D228D2 /* Preview Content */,
+				8821CEEB2BFE1F3E00D228D2 /* Root */,
 				8821CEEF2BFE1F6000D228D2 /* Services */,
 				8821CEEE2BFE1F5100D228D2 /* SplashScreen */,
 				8821CEED2BFE1F4C00D228D2 /* Utils */,
-				8821CEEC2BFE1F4900D228D2 /* Core */,
-				8821CEEB2BFE1F3E00D228D2 /* Root */,
-				8821CEEA2BFE1F3A00D228D2 /* App */,
-				8821CEE02BFE1C6D00D228D2 /* Assets.xcassets */,
-				8821CEE22BFE1C6D00D228D2 /* Preview Content */,
 			);
 			path = LaskNewsMobileApp;
 			sourceTree = "<group>";
@@ -94,6 +101,11 @@
 		8821CEEC2BFE1F4900D228D2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8821CF052BFE2DE700D228D2 /* Models */,
+				8821CEF72BFE291700D228D2 /* Home */,
+				8821CEF82BFE291A00D228D2 /* Explore */,
+				8821CEF92BFE291D00D228D2 /* Bookmark */,
+				8821CEFA2BFE292B00D228D2 /* Profile */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -119,6 +131,115 @@
 			children = (
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8821CEF42BFE285A00D228D2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8821CEF52BFE286700D228D2 /* View Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8821CEF72BFE291700D228D2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8821CEFC2BFE294700D228D2 /* ViewModel */,
+				8821CEFB2BFE294400D228D2 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8821CEF82BFE291A00D228D2 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				8821CEFE2BFE295300D228D2 /* ViewModel */,
+				8821CEFD2BFE295100D228D2 /* View */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		8821CEF92BFE291D00D228D2 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				8821CF002BFE296100D228D2 /* ViewModel */,
+				8821CEFF2BFE295A00D228D2 /* View */,
+			);
+			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		8821CEFA2BFE292B00D228D2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8821CF022BFE296800D228D2 /* ViewModel */,
+				8821CF012BFE296600D228D2 /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		8821CEFB2BFE294400D228D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8821CF032BFE2C2F00D228D2 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8821CEFC2BFE294700D228D2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8821CEFD2BFE295100D228D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8821CEFE2BFE295300D228D2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8821CEFF2BFE295A00D228D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8821CF002BFE296100D228D2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8821CF012BFE296600D228D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8821CF022BFE296800D228D2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8821CF052BFE2DE700D228D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8821CF062BFE2DF300D228D2 /* Article.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,8 +312,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8821CF072BFE2DF300D228D2 /* Article.swift in Sources */,
+				8821CEF62BFE286700D228D2 /* View Extensions.swift in Sources */,
 				8821CEDF2BFE1C6C00D228D2 /* ContentView.swift in Sources */,
 				8821CEDD2BFE1C6C00D228D2 /* LaskNewsMobileAppApp.swift in Sources */,
+				8821CF042BFE2C2F00D228D2 /* HomeView.swift in Sources */,
 				8821CEF12BFE1F7100D228D2 /* SplashScreenView.swift in Sources */,
 				8821CEF32BFE220F00D228D2 /* WelcomeView.swift in Sources */,
 			);

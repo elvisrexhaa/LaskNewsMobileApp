@@ -22,10 +22,10 @@ struct WelcomeView: View {
                 Image(.welcomeBg)
                     .resizable()
                     .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+                    .frame(width: getRect().width, height: getRect().height * 0.5)
                 
                 RoundedRectangle(cornerRadius: 20)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+                    .frame(width: getRect().width, height: getRect().height * 0.5)
                     .foregroundStyle(.white)
                     .overlay {
                         VStack(spacing: 14) {
@@ -36,6 +36,7 @@ struct WelcomeView: View {
                             
                             Text("From Politics to Entertainment: Your One-Stop Source for Comprehensive Coverage of the Latest News and Developments Across the Glob will be right on your hand.")
                                 .foregroundStyle(Color(.systemGray3))
+                                .padding(.bottom, 20)
                             
                             Button {
                                 withAnimation(.smooth) {
@@ -55,7 +56,7 @@ struct WelcomeView: View {
                         }
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
-                        .padding(.bottom, 60)
+                        .padding(.bottom, 40)
                     }
             }
             

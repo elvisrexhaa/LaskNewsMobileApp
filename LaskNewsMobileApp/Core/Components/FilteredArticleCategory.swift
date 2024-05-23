@@ -8,13 +8,18 @@
 import SwiftUI
 
 enum FilteredCategory: String, CaseIterable {
-    case travel = "Travel"
-    case technology = "Technology"
-    case entertainment = "Entertainment"
+    
     case business = "Business"
+    case entertainment = "Entertainment"
+    case general = "General"
+    case health = "Health"
+    case science = "Science"
+    case sports = "Sports"
+    case technology = "Technology"
+    
+    
+    
 }
-
-
 
 struct FilteredArticleCategory: View {
     
@@ -22,44 +27,42 @@ struct FilteredArticleCategory: View {
     @Namespace private var animation
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(FilteredCategory.allCases, id: \.rawValue) { category in
-                    Button {
-                        withAnimation(.snappy) {
-                            activeCategory = category
-                        }
-                    } label: {
-                        Text(category.rawValue)
-                            .foregroundStyle(.black)
-                            .font(.subheadline)
-                            .padding(.vertical, 6)
-                            .padding(.horizontal, 16)
-                            .background {
-                                ZStack {
-                                    if activeCategory == category {
-                                        Color.activeFilteredCategory
-                                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                                            .matchedGeometryEffect(id: "ACTIVECATEGORY", in: animation)
-                                    } else {
-                                        Color.activeFilteredCategory
-                                            .clipShape(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 1))
-                                          
-                                    }
-                                        
-                                    
-                                }
-                                
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(FilteredCategory.allCases, id: \.rawValue) { category in
+                        Button {
+                            withAnimation(.snappy) {
+                                activeCategory = category
+                                proxy.scrollTo(category, anchor: .center)
                             }
-                            
+                        } label: {
+                            Text(category.rawValue)
+                                .foregroundStyle(.black)
+                                .bold()
+                                .font(.subheadline)
+                                .padding(.vertical, 6)
+                                .padding(.horizontal, 16)
+                                .background {
+                                    ZStack {
+                                        if activeCategory == category {
+                                            Color.activeFilteredCategory
+                                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                                .matchedGeometryEffect(id: "ACTIVECATEGORY", in: animation)
+                                        } else {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.activeFilteredCategory, lineWidth: 1)
+                                        }
+                                    }
+                                }
+                        }
+                        .id(category)
                     }
-                    
                 }
+                .padding(.horizontal)
+                .padding(.leading, 8)
             }
-            .padding(.horizontal)
-            .padding(.leading, 8)
         }
-        .scrollIndicators(.hidden)
     }
 }
 

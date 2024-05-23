@@ -25,7 +25,7 @@ struct TabBarView: View {
                     .tabItem { Image(systemName: "house") }
                     .tag(Tab.explore)
                 
-                Text("Bookmark View")
+                BookmarkView()
                     .tabItem { Image(systemName: "house") }
                     .tag(Tab.bookmark)
                 

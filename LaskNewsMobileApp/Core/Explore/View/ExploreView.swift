@@ -11,11 +11,13 @@ struct ExploreView: View {
     
     @State private var activeCategory: FilteredCategory = .business
     @State private var animateSearchBar: Bool = false
-    @State private var text: String = ""
+    
+    @EnvironmentObject private var exploreViewModel: ExploreViewModel
+    @State private var selectedArticleByCategory: Article?
     
     var body: some View {
         VStack(spacing: 16) {
-            exploreHeader(animateSearchBar: $animateSearchBar, text: $text)
+            exploreHeader(animateSearchBar: $animateSearchBar, text: $exploreViewModel.text)
             
             ScrollView {
                 FilteredArticleCategory(activeCategory: $activeCategory)
@@ -26,11 +28,22 @@ struct ExploreView: View {
                 
                 
                 LazyVStack(spacing: 16) {
-                    ForEach(0..<10) { _ in
-                        ArticleRowCardView()
+                    ForEach(exploreViewModel.filterArticles, id: \.title) { article in
+                        ArticleRowCardView(article: article, onBookmarkPressed: {
+                            exploreViewModel.addArticleToBookmark(article: article)
+                        })
+                        .environmentObject(exploreViewModel)
+                        
+                            .onTapGesture {
+                                withAnimation(.smooth) {
+                                    selectedArticleByCategory = article
+                                }
+                            }
                     }
                 }
                 .padding(.top, 20)
+                .padding(.bottom, 60)
+                
                 
                 
                 
@@ -38,11 +51,41 @@ struct ExploreView: View {
             }
             .scrollIndicators(.hidden)
         }
+        
+        
+        
+        .animation(.snappy, value: exploreViewModel.text)
+        .opacity(selectedArticleByCategory != nil ? 0 : 1)
+        .overlay(content: {
+            if let selectedArticleByCategory = selectedArticleByCategory {
+                Text(selectedArticleByCategory.title)
+                    .transition(.slide)
+            }
+        })
+        .onChange(of: activeCategory) { oldValue, newValue in
+            Task {
+                do {
+                    try await exploreViewModel.fetchArticleByCategory(selectedCategory: newValue)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        .onAppear {
+            Task {
+                do {
+                    try await exploreViewModel.fetchArticleByCategory(selectedCategory: activeCategory)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
 #Preview {
     ExploreView()
+        .environmentObject(ExploreViewModel())
 }
 
 
@@ -68,7 +111,7 @@ private func exploreHeader(animateSearchBar: Binding<Bool>, text: Binding<String
             if animateSearchBar.wrappedValue {
                 Button {
                     withAnimation(.snappy) {
-                       //reset the text
+                        //reset the text
                         text.wrappedValue = ""
                         animateSearchBar.wrappedValue = false
                     }
@@ -87,12 +130,12 @@ private func exploreHeader(animateSearchBar: Binding<Bool>, text: Binding<String
             
             
             
-           
+            
         }
         .foregroundStyle(Color(.systemGray2))
         .bold()
     }
     .padding()
-//    .padding(.horizontal, 10)
+    //    .padding(.horizontal, 10)
     .background(.activeFilteredCategory)
 }

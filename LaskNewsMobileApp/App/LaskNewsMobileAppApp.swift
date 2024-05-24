@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct LaskNewsMobileAppApp: App {
+    
+    @StateObject var exploreViewModel = ExploreViewModel()
+    
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
+                .environmentObject(exploreViewModel)
         }
     }
 }

@@ -19,8 +19,9 @@ struct URLConstants {
         return "https://newsapi.org/v2/top-headlines?country=us&apiKey=\(apiKey)"
     }
     
-    static func articleByCategoryUrl(category: FilteredCategory) -> String {
-        return "https://newsapi.org/v2/top-headlines?category=\(category)&apiKey=\(apiKey)"
+    static func articleByCategoryUrl(category: FilteredCategory = .business) -> String {
+        return "https://newsapi.org/v2/top-headlines?country=us&category=\(category)&apiKey=\(apiKey)"
+        
     }
 
 }

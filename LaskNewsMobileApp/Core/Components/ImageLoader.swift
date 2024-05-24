@@ -6,44 +6,36 @@
 //
 
 import SwiftUI
-import Kingfisher
+
 
 struct ImageLoader: View {
     
-    @State private var cacheManager: CacheManager = CacheManager()
+    @StateObject private var cacheManager = CacheManager()
     var url: String
+    var width: CGFloat
+    var height: CGFloat
     
     var body: some View {
-        
         VStack {
-            if let image = cacheManager.uimage {
-                Image(uiImage: image)
+            if let uiImage = cacheManager.uimage {
+                Image(uiImage: uiImage)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100) // Adjust size as needed
-            } else {
-                // Placeholder or loading indicator
-                Text("Loading...")
+                    .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                    .frame(width: width, height: height)
+                    .clipShape(.rect(cornerRadius: 8))
             }
-           
+            
         }
-        .onAppear {
-            Task {
-                do {
-                    try await cacheManager.fetchImage(url: url)
-                } catch {
-                    print("Failed to fetch image: \(error.localizedDescription)")
-                }
+        .task {
+            do {
+                try await cacheManager.fetchImage(url: url)
+            } catch {
+                print(error.localizedDescription)
             }
         }
-        
-        
-        
-        
-           
     }
 }
 
 #Preview {
-    ImageLoader(url: "https://ichef.bbci.co.uk/news/1024/branded_news/ddad/live/10802f80-19a1-11ef-8810-7ddce6503835.jpg")
+    ImageLoader(url: "https://ichef.bbci.co.uk/news/1024/branded_news/ddad/live/10802f80-19a1-11ef-8810-7ddce6503835.jpg", width: 112, height: 80)
 }

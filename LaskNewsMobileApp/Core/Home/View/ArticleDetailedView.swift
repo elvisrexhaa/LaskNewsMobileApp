@@ -14,6 +14,7 @@ struct ArticleDetailedView: View {
     @Binding var selectedArticle: Article?
     let article: Article
     var animation: Namespace.ID
+    @State private var scrollOffset: CGFloat = 0
     
     var body: some View {
         VStack {
@@ -38,10 +39,13 @@ struct ArticleDetailedView: View {
                 .foregroundStyle(.white)
                 .overlay(alignment: .topLeading) {
                     ScrollView {
+                        scrollViewDetection(scrollOffset: $scrollOffset, showTabBar: $showTabBar, selectedArticle: $selectedArticle)
+                        
                         VStack(alignment: .leading, spacing: 10) {
                             Text(article.title)
                                 .bold()
                                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                .lineLimit(3)
                             
                             HStack {
                                 Circle()
@@ -62,6 +66,11 @@ struct ArticleDetailedView: View {
                         .padding()
                     }
                 }
+                .overlay {
+                    Text("\(scrollOffset)")
+                        .padding()
+                        .background(Color.red)
+                }
             
             
             
@@ -74,10 +83,6 @@ struct ArticleDetailedView: View {
         
         .overlay(alignment: .bottom) {
             ZStack {
-                
-                
-                
-                
                 
                 RoundedRectangle(cornerRadius: 15)
                     .frame(height: 70)
@@ -115,4 +120,34 @@ struct ArticleDetailedView: View {
 
 #Preview {
     ArticleDetailedView(showTabBar: .constant(false) ,selectedArticle: .constant(Article.init(title: "", author: "", url: "", urlToImage: "", publishedAt: "", content: "")), article: Article(title: "deiuwhiuewhiuehfiuhewiufhewiufheiudeniuwehiufhweiuhfiuweh", author: "efwdewfwfwedwefefewfwefewf", url: "", urlToImage: "https://a2.espncdn.com/combiner/i?img=%2Fphoto%2F2020%2F0530%2Fr703805_1296x729_16%2D9.jpg", publishedAt: "", content: "isdehuybewudfehwuyedghjuwebfuywbeuyeuwyhfiuyhweiuhiuwgheiuhwieuhtiwehiufhweiufwefuhiuewhiuhiufhiuwehfuewhfiuehwidewhfuwiuefhiuehiuehwgeiuwiuewhiugehwiufhiuhewfiuehwfiuheiuwhfeiuwhfiuehwdinweiufhiuehwiuhweiguhwefnfdyweiufhewiufhweiufhiuwehfiuehwgiuyhewiufdeiuwhfeiuwheiuhgiuewhgiuehwighewiuehiuwhiugihughiuhiuhiuhiuhiuhiuhiuhiuhiuihuhiuhiuhiuhiuhiuhiuhiuhiuhiuhiueiuwhdiuewhfniufgiewhuehwiufhvjwecnbiuhiuhiuhgiuweghiuweghiug"), animation: Namespace().wrappedValue)
+}
+
+
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+extension View {
+    func scrollViewDetection(scrollOffset: Binding<CGFloat>, showTabBar: Binding<Bool>, selectedArticle: Binding<Article?>) -> some View {
+        GeometryReader { geometry in
+            Color.clear
+                .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .scrollView).minY)
+            
+        }
+        .onPreferenceChange(ScrollOffsetPreferenceKey.self, perform: { value in
+            scrollOffset.wrappedValue = value
+            
+            if value > 60 {
+                withAnimation(.snappy) {
+                    showTabBar.wrappedValue = true
+                    selectedArticle.wrappedValue = nil
+                }
+            }
+            
+        })
+    }
 }

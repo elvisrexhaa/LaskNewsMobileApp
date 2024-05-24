@@ -23,10 +23,12 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     HStack(spacing: 0) {
                         ForEach(homeViewModel.topHeadlineArticles, id: \.title) { article in
-                            articleCard(article, onArticlePressed: {
-                                selectedArticle = article
-                                showTabBar = false
-                            }, animation: animation)
+                            if ((article.urlToImage?.isEmpty) != nil) {
+                                articleCard(article, onArticlePressed: {
+                                    selectedArticle = article
+                                    showTabBar = false
+                                }, animation: animation)
+                            }
                         }
                     }
                 }
@@ -37,13 +39,14 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal) {
                     HStack(spacing: 0) {
-                        ForEach(homeViewModel.topHeadlineArticles, id: \.title) { article in
+                        ForEach(homeViewModel.topHeadlineArticles.shuffled(), id: \.title) { article in
                             articleCard(article, onArticlePressed: {
                                 selectedArticle = article
                                 showTabBar = false
                             }, animation: animation)
                         }
                     }
+                    .padding(.bottom, 40)
                 }
                 .scrollIndicators(.hidden)
             }
@@ -96,12 +99,7 @@ private func articleCard(_ article: Article, onArticlePressed: (() -> ())?, anim
         
         if let imageUrl = article.urlToImage {
             
-            KFImage(URL(string: imageUrl))
-                .resizable()
-//                .matchedGeometryEffect(id: article.id, in: animation)
-//                .aspectRatio(1, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                .frame(width: UIScreen.main.bounds.width / 1.3, height: UIScreen.main.bounds.height / 3.5)
-                .clipShape(.rect(cornerRadius: 10))
+            ImageLoader(url: imageUrl, width: UIScreen.main.bounds.width / 1.3, height: UIScreen.main.bounds.height / 3.5)
         } else {
             RoundedRectangle(cornerRadius: 10)
                 .foregroundStyle(.clear)

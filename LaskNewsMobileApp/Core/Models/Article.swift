@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct ArticleResponse: Codable {
+struct ArticleResponse: Codable, Hashable {
     let status: String
     let totalResults: Int
     let articles: [Article]
 }
 
-struct Article: Codable {
+struct Article: Codable, Hashable {
     let title: String
     let author: String?
     let url: String

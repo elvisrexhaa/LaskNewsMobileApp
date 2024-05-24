@@ -10,6 +10,7 @@ import SwiftUI
 struct BookmarkView: View {
     
     @State private var editBookmark: Bool = false
+    @EnvironmentObject var exploreViewModel: ExploreViewModel
     
     var body: some View {
         VStack {
@@ -17,9 +18,9 @@ struct BookmarkView: View {
             
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(0..<10) { _ in
+                    ForEach(exploreViewModel.bookmarks, id: \.title) { bookmarkedArticle in
                         HStack {
-                            ArticleRowCardView()
+                            ArticleRowCardView(article: bookmarkedArticle)
                             
                             if editBookmark {
                                 Image(systemName: "bookmark")
@@ -30,11 +31,13 @@ struct BookmarkView: View {
                 .padding(.top)
             }
         }
+        
     }
 }
 
 #Preview {
     BookmarkView()
+        .environmentObject(ExploreViewModel())
 }
 
 

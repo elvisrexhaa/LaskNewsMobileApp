@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum FilteredCategory: String, CaseIterable {
+enum FilteredCategory: String, Identifiable, CaseIterable {
     
     case business = "Business"
     case entertainment = "Entertainment"
@@ -16,6 +16,8 @@ enum FilteredCategory: String, CaseIterable {
     case science = "Science"
     case sports = "Sports"
     case technology = "Technology"
+    
+    var id: String { self.rawValue }
     
     
     
@@ -30,7 +32,7 @@ struct FilteredArticleCategory: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(FilteredCategory.allCases, id: \.rawValue) { category in
+                    ForEach(FilteredCategory.allCases) { category in
                         Button {
                             withAnimation(.snappy) {
                                 activeCategory = category
